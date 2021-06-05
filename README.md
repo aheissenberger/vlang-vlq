@@ -31,7 +31,7 @@ println(res) // 123
 
 ## API Documentation
 
-[auto generated documentation](https://github.com/aheissenberger/vlang-vlq/raw/HEAD/_docs/vlq.md)
+[auto generated documentation](https://github.com/aheissenberger/vlang-vlq/blob/main/_docs/vlq.md)
 (created `v doc -f md -m . -o .`)
 
 ### Roadmap
