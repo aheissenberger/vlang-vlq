@@ -2,7 +2,7 @@ module vlq
 
 import math
 import io
-import bytereader
+//import bytereader
 
 const (
 	shift = byte(5)
@@ -49,16 +49,19 @@ fn decode64(input byte) byte {
 //
 // Note that `i64::MIN = -(2^63)` cannot be represented in that form, and this
 // function will return `Error::Overflowed` when attempting to decode it.
-pub fn decode( mut input bytereader.ByteReader) ?i64 {
+pub fn decode( mut input io.Reader) ?i64 {
+
+	mut buf := []byte{len: 1}
+
     mut accum:= u64( 0)
     mut shifter := 0
 	mut digit := byte(0)
 
     mut keep_going := true
     for keep_going {
-        data := input.next() or {panic('Unexpected EOF')} //.next().ok_or(Error::UnexpectedEof)?;
-		
-        digit = decode64(data)
+		len := input.read(mut buf)  or {panic('Unexpected EOF')}
+		if len==0 {panic('no content')}
+        digit = decode64(buf[0])
         keep_going = (digit & vlq.continued) != 0
 
         digit_value := u64(digit & vlq.mask) << u32(shifter)
