@@ -33,7 +33,7 @@ println(res) // 123
 
 ## API Documentation
 
-[auto generated documentation](https://github.com/aheissenberger/vlang-vlq/blob/main/_docs/vlq.md)
+[auto generated documentation](https://github.com/aheissenberger/vlang-vlq/blob/main/_docs/vlq.md#contents)
 (created `v doc -f md -m . -o .`)
 
 ### Roadmap
@@ -76,4 +76,4 @@ fn encode(value i64, mut output io.Writer)
 
 [[Return to contents]](#Contents)
 
-#### Powered by vdoc. Generated on: 6 Jun 2021 01:30:41
+#### Powered by vdoc. Generated on: 6 Jun 2021 01:32:14
