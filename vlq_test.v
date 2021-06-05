@@ -17,15 +17,6 @@ struct TestData {
 
 type TestDataList = []TestData
 
-fn (mut b Buf) read(mut buf []byte) ?int {
-	if !(b.i < b.bytes.len) {
-		return none
-	}
-	n := copy(buf, b.bytes[b.i..])
-	b.i += n
-	return n
-}
-
 fn test_decode_encode_64() {
 	for i := 0; i < 64; i++ {
 		assert decode64(encode64(byte(i))) == i
@@ -47,6 +38,15 @@ fn test_decode_a() {
 		res := decode(mut &input) or { panic('panic') }
 		assert res == test_data.expected
 	}
+}
+
+fn (mut b Buf) read(mut buf []byte) ?int {
+	if !(b.i < b.bytes.len) {
+		return none
+	}
+	n := copy(buf, b.bytes[b.i..])
+	b.i += n
+	return n
 }
 
 fn make_test_reader(data string) io.Reader {
