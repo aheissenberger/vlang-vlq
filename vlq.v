@@ -38,7 +38,7 @@ fn decode64(input byte) byte {
 	return byte(vlq.enc_index[input - vlq.enc_char_special_plus])
 }
 
-// Decode a single VLQ value from the input, returning the value.
+// Decode a single VLQ value from the input stream, returning the value.
 //
 // # Range
 //
@@ -88,7 +88,7 @@ fn encode64(input byte) byte {
 }
 
 // Encode a value as Base64 VLQ, sending it to the writer
-pub fn encode(value i64, output io.Writer) {
+pub fn encode(value i64, mut output io.Writer) {
 	signed := value < 0
 	mut value_u64 := u64(math.abs(value)) << 1
 	if signed {
