@@ -9,9 +9,33 @@ Encode and decode the Base64-encoded [VLQ](https://en.wikipedia.org/wiki/Variabl
 v install vlq
 ```
 
+## Usage
+
+### Encoding
+
+The methode expects a signed integer and will create a VLQ and write the base64 encoded data to the provide IO stream.
+
+```v
+data = 123
+encode(data,output) // '2H'
+```
+### Decoding
+
+Decode a single VLQ value from the input stream, returning the value.
+
+```v
+/* input IO stream: '2H' */
+res := decode(input) or { panic('panic') } 
+println(res) // 123
+```
+
+## API Documentation
+
+https://vpm.vlang.io/mod/vlq
+
 ### Roadmap
 
- - [ ] additional test
+ - [ ] additional tests
  - [ ] performance benchmark
 
 ### Contribution
