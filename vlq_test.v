@@ -1,6 +1,8 @@
 module vlq
-//import bytereader
+
+// import bytereader
 import io
+
 struct Buf {
 pub:
 	bytes []byte
@@ -10,7 +12,7 @@ mut:
 
 struct TestData {
 	decode_val string
-	expected i64
+	expected   i64
 }
 
 type TestDataList = []TestData
@@ -23,39 +25,34 @@ fn (mut b Buf) read(mut buf []byte) ?int {
 	b.i += n
 	return n
 }
-fn test_decode_encode_64(){
 
+fn test_decode_encode_64() {
 	for i := 0; i < 64; i++ {
-		assert i==decode64(encode64(byte(i)))
+		assert decode64(encode64(byte(i))) == i
 	}
 }
 
 fn test_decode_a() {
-
 	decode_values := [
-		TestData{ 'A',0},
-		TestData{ 'C',1},
-		TestData{ 'D',-1},
-		TestData{ '2H',123},
-		TestData{ 'qxmvrH',123456789},
+		TestData{'A', 0},
+		TestData{'C', 1},
+		TestData{'D', -1},
+		TestData{'2H', 123},
+		TestData{'qxmvrH', 123456789},
 	]
 
 	for _, test_data in decode_values {
-		
-	
-	mut input := make_test_reader(test_data.decode_val)
+		mut input := make_test_reader(test_data.decode_val)
 
-	res := decode(mut &input) or {
-		panic('panic')
-	}
-	assert res == test_data.expected
+		res := decode(mut &input) or { panic('panic') }
+		assert res == test_data.expected
 	}
 }
 
 fn make_test_reader(data string) io.Reader {
-	buf := Buf {
+	buf := Buf{
 		bytes: data.bytes()
 	}
 
-	return  io.new_buffered_reader(reader: buf)
+	return io.new_buffered_reader(reader: buf)
 }
