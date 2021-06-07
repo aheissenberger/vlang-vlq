@@ -6,7 +6,7 @@ Encode and decode the Base64-encoded [VLQ](https://en.wikipedia.org/wiki/Variabl
 
 
 ```sh
-v install vlq
+v install aheissenberger.vlq
 ```
 
 ## Usage
