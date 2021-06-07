@@ -2,12 +2,11 @@ module vlq
 
 import math
 import io
-// import bytereader
 
 const (
 	shift                  = byte(5)
-	mask                   = byte((1 << 5) - 1)
-	continued              = byte(1 << 5)
+	mask                   = byte((1 << shift) - 1)
+	continued              = byte(1 << shift)
 
 	// index start is: byte - vlq.enc_char_special_plus
 	enc_index              = [62, 0, 0, 0, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 0, 0, 0,
@@ -15,7 +14,6 @@ const (
 		22, 23, 24, 25, 0, 0, 0, 0, 0, 0, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
 		40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]!
 
-	ending_table           = [0, 2, 1]!
 	enc_table              = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
 	enc_char_start_au      = 65
@@ -46,7 +44,7 @@ fn decode64(input byte) byte {
 // absolute value: `[-(2^63 - 1), 2^63 - 1]`.
 //
 // Note that `i64::MIN = -(2^63)` cannot be represented in that form, and this
-// function will return `Error::Overflowed` when attempting to decode it.
+// NOT IMPLEMENTED: function will return `Error::Overflowed` when attempting to decode it.
 pub fn decode(mut input io.Reader) ?i64 {
 	mut buf := []byte{len: 1}
 
@@ -63,10 +61,9 @@ pub fn decode(mut input io.Reader) ?i64 {
 		digit = decode64(buf[0])
 		keep_going = (digit & vlq.continued) != 0
 
-		digit_value := u64(digit & vlq.mask) << u32(shifter)
-		//.ok_or(Error::Overflow)?;
+		digit_value := u64(digit & vlq.mask) << u32(shifter) // TODO: check Overflow
 
-		accum += digit_value //.ok_or(Error::Overflow)?;
+		accum += digit_value
 		shifter += vlq.shift
 	}
 

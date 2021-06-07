@@ -64,7 +64,7 @@ Distributed under the "bsd-2-clause" License. See [LICENSE.txt](LICENSE.txt) for
 ```v
 fn decode(mut input io.Reader) ?i64
 ```
- Decode a single VLQ value from the input stream, returning the value.   # Range   Supports all numbers that can be represented by a sign bit and a 63 bit  absolute value: `[-(2^63 - 1), 2^63 - 1]`.   Note that `i64::MIN = -(2^63)` cannot be represented in that form, and this  function will return `Error::Overflowed` when attempting to decode it. 
+ Decode a single VLQ value from the input stream, returning the value.   # Range   Supports all numbers that can be represented by a sign bit and a 63 bit  absolute value: `[-(2^63 - 1), 2^63 - 1]`.   Note that `i64::MIN = -(2^63)` cannot be represented in that form, and this  NOT IMPLEMENTED: function will return `Error::Overflowed` when attempting to decode it. 
 
 [[Return to contents]](#Contents)
 
@@ -76,4 +76,4 @@ fn encode(value i64, mut output io.Writer)
 
 [[Return to contents]](#Contents)
 
-#### Powered by vdoc. Generated on: 6 Jun 2021 01:32:14
+#### Powered by vdoc. Generated on: 7 Jun 2021 10:50:43
