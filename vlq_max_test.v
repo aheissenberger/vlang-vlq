@@ -14,13 +14,13 @@ pub mut:
 	bytes []byte
 }
 
-fn test_max() {
+fn test_max() ? {
 	for i in 0 .. 1000 {
 		expected_input := i * 100_000_000
 		// print('$expected_input, ')
 		mut output := TestWriter{}
 
-		encode(expected_input, mut &output)
+		encode(expected_input, mut &output) ?
 
 		mut input := make_test_reader(output.bytes)
 

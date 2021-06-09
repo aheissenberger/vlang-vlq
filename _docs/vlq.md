@@ -8,7 +8,7 @@ Encode and decode the Base64-encoded [VLQ](https://en.wikipedia.org/wiki/Variabl
 
 
 ```sh
-v install vlq
+v install aheissenberger.vlq
 ```
 
 ## Usage
@@ -70,10 +70,10 @@ fn decode(mut input io.Reader) ?i64
 
 ## encode
 ```v
-fn encode(value i64, mut output io.Writer)
+fn encode(value i64, mut output io.Writer) ?
 ```
  Encode a value as Base64 VLQ, sending it to the writer 
 
 [[Return to contents]](#Contents)
 
-#### Powered by vdoc. Generated on: 7 Jun 2021 10:50:43
+#### Powered by vdoc. Generated on: 9 Jun 2021 12:58:53
